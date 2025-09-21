@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://aisfizoyfpcisykarrnt.supabase.co/storage/v1/object/public/imagens/LOGO%20TRIAD3%20.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Score Inteligente Triad3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              montserrat: ['Montserrat', 'sans-serif'],
+            },
+            colors: {
+              dark: {
+                background: '#111827',
+                text: '#F3F4F6',
+                action: '#375A7F',
+                border: '#374151',
+                accent: '#17A2B8',
+                card: '#1F2937',
+              }
+            }
+          }
+        }
+      }
+    </script>
+  <style>
+      .app-logo {
+        height: 43px;
+        width: 43px;
+        border-radius: 50%;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+      .app-logo:hover {
+        transform: scale(1.15);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      }
+      .login-logo {
+          width: 128px;
+          height: 128px;
+          border-radius: 50%;
+          object-fit: cover;
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+          margin: 0 auto 1.5rem auto; /* Center and add margin bottom */
+          box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      }
+      .login-logo:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+      }
+
+      .loader-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .loader {
+        --path: #6b7280;
+        --dot: #818cf8;
+        --duration: 3s;
+        height: 44px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .loader svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .loader svg polygon {
+        fill: none;
+        stroke: var(--path);
+        stroke-width: 10px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-dasharray: 145 76 145 76;
+        stroke-dashoffset: 0;
+        animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+          infinite;
+      }
+
+      .loader.triangle {
+        width: 48px;
+      }
+
+      .loader.triangle:before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        position: absolute;
+        display: block;
+        background: var(--dot);
+        top: 37px;
+        left: 21px;
+        transform: translate(-10px, -18px);
+        animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+          infinite;
+      }
+
+      @keyframes pathTriangle {
+        33% {
+          stroke-dashoffset: 74;
+        }
+
+        66% {
+          stroke-dashoffset: 147;
+        }
+
+        100% {
+          stroke-dashoffset: 221;
+        }
+      }
+
+      @keyframes dotTriangle {
+        33% {
+          transform: translate(0, 0);
+        }
+
+        66% {
+          transform: translate(10px, -18px);
+        }
+
+        100% {
+          transform: translate(-10px, -18px);
+        }
+      }
+
+      .loadingtext p {
+        color: white;
+        position: relative;
+        font-size: 1.25rem;
+        margin: 0;
+      }
+
+      .loadingtext p::after {
+        position: absolute;
+        animation: b 3s infinite linear;
+        color: white;
+        content: "";
+        left: 105%;
+      }
+
+      @keyframes b {
+        0% {
+          content: "";
+        }
+
+        10% {
+          content: ".";
+        }
+
+        40% {
+          content: "..";
+        }
+
+        70% {
+          content: "...";
+        }
+
+        100% {
+          content: "";
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 640px) { /* sm breakpoint */
+        .login-logo {
+          width: 96px;
+          height: 96px;
+        }
+      }
+
+      /* NeuroMapa Analysis Styles */
+      .analysis-container {
+        font-family: 'Montserrat', sans-serif;
+        color: #F3F4F6;
+      }
+      .analysis-card {
+        background-color: #1F2937; /* dark:card */
+        border-radius: 12px;
+        border: 1px solid #374151; /* dark:border */
+        padding: 24px;
+        margin-bottom: 24px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .analysis-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 255, 255, 0.05), 0 4px 6px -2px rgba(0, 255, 255, 0.03);
+      }
+      .analysis-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.25rem; /* text-xl */
+        font-weight: 700;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #374151;
+      }
+      .analysis-icon {
+          width: 28px;
+          height: 28px;
+          flex-shrink: 0;
+      }
+      .analysis-content p {
+          margin-bottom: 1rem;
+          line-height: 1.7;
+          color: #D1D5DB; /* gray-300 */
+      }
+      .analysis-content strong {
+          color: #67E8F9; /* cyan-300 */
+          font-weight: 600;
+          display: block;
+          margin-bottom: 0.5rem;
+          font-size: 1rem;
+      }
+
+      @keyframes toast-in-out {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        10%, 90% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+      .toast-notification {
+        animation: toast-in-out 3s ease-in-out forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "recharts": "https://esm.sh/recharts@^3.1.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.44.4",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1?bundle",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0?bundle",
+    "jspdf": "https://esm.sh/jspdf@^2.5.1",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      // Proteção anti-DevTools aprimorada
+      (function() {
+        // Função para detectar dispositivos móveis e tablets de forma mais confiável.
+        // O objetivo é desativar as proteções nesses dispositivos para evitar falsos positivos,
+        // como o bloqueio indevido em iPhones ou iPads quando a barra de endereço/navegação
+        // do navegador é exibida ou ocultada.
+        function isMobileOrTablet() {
+          const userAgent = navigator.userAgent;
+
+          // 1. Verificação padrão via User Agent para a maioria dos celulares.
+          if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+            return true;
+          }
+
+          // 2. Detecção específica para iPads (com iPadOS 13+) que se identificam como um desktop Mac.
+          // Esses dispositivos reportam `navigator.platform` como 'MacIntel', mas possuem
+          // capacidade de toque (`maxTouchPoints > 1`), o que os diferencia de um Mac real.
+          if (/iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+            return true;
+          }
+
+          return false;
+        }
+
+        // Se for um dispositivo móvel ou tablet, o script de proteção é interrompido.
+        if (isMobileOrTablet()) {
+          return;
+        }
+
+        // As proteções abaixo serão executadas APENAS em DESKTOPS.
+
+        // Bloqueio de teclas de atalho comuns para abrir DevTools
+        document.addEventListener('keydown', function(e) {
+          if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') ||
+            (e.ctrlKey && e.key.toLowerCase() === 'u') ||
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'c')
+          ) {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        // Impede o clique com o botão direito do mouse (menu de contexto)
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+
+        // Verifica periodicamente se as DevTools foram abertas medindo o tamanho da janela
+        const devToolsCheckInterval = setInterval(function() {
+          if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+            // Se a diferença de tamanho for suspeita, bloqueia o acesso
+            document.body.innerHTML = `<div style="background-color: var(--darker, #05070c); color: var(--text-primary, white); width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; font-family: var(--font-display, monospace);">
+                                              <h1 style="text-align:center;">Acesso Bloqueado ❌</h1>
+                                            </div>`;
+            // Interrompe a verificação para economizar recursos
+            clearInterval(devToolsCheckInterval);
+          }
+        }, 1000);
+      })();
+    </script>
+  </body>
+</html>

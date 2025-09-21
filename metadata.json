@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Final Score Inteligente Supabase",
+  "description": "Score Inteligente Supabase",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}
