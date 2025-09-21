@@ -153,7 +153,17 @@ const ProfilePage: React.FC = () => {
                     {notification.message}
                 </div>
             )}
-            <h1 className="text-2xl sm:text-3xl font-bold mb-8">Meu Perfil</h1>
+            <div className="flex items-center justify-between mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold">Meu Perfil</h1>
+                {currentUser.role === UserRole.GROUP && (
+                    <button
+                        onClick={() => window.location.hash = '#group-dashboard'}
+                        className="px-4 py-2 text-sm font-semibold text-white bg-dark-action rounded-lg hover:bg-dark-accent transition-colors"
+                    >
+                        &larr; Voltar ao Painel do Grupo
+                    </button>
+                )}
+            </div>
             
             <div className="bg-dark-card p-6 sm:p-8 rounded-xl shadow-md border border-dark-border mb-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6">
                  <div className="relative group shrink-0">
